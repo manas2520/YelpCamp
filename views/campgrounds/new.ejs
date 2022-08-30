@@ -1,0 +1,59 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <!-- telling the div to be 6 units wide but not starting from the left,so offset 3 from left -->
+        <!-- one way to center the div -->
+        <div class="col-6 offset-3">
+            <!-- Performing client side validation -->
+            <!-- By adding required to a field, we are telling the browser to validate the form for us. However that is not reliable -->
+            <!-- By adding "novalidate", we stop the browser from validating the form and allow bootstrap to take the reins -->
+            <!-- We also give the form a class of "validated-form"(you can give any class name you want) which we will use in bootstrap validation via javascript -->
+            <form action="/campgrounds" method="post" novalidate class="validated-form">
+                <div class="mb-3">
+                    <!-- form-label and form-control are bootstrap classes, don't get confused -->
+                    <label class="form-label" for="title">Title</label>
+                    <!-- we can use campground[x] format so that when the post request is created,everything is under campground -->
+                    <input class="form-control" type="text" id="title" name="campground[title]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image URL</label>
+                    <input class="form-control" type="text" id="image" name="campground[image]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label" for="price">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="campground[price]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="campground[description]"
+                        required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Add Campground</button>
+                </div>
+            </form>
+        </div>
+    </div>
