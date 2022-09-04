@@ -1,9 +1,7 @@
 <% layout('layouts/boilerplate') %>
     <h1>All Campgrounds</h1>
-    <div><a href="/campgrounds/new">Add Campground</a></div>
-
     <% for(let campground of campgrounds) {%>
-        <div class="card" mb-3>
+        <div class="card mb-3">
             <!-- implementing grid system here, look carefully -->
             <div class="row">
                 <!-- md-4 : after size medium, take 4 units out of 12, or a third of the row -->

@@ -6,6 +6,11 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
     body: String,
     rating: Number,
+    author: {
+        // reference to the type 'User' model 
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 });
 
 // creating review model

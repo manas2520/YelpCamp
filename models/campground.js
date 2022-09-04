@@ -10,6 +10,11 @@ const campgroundSchema = new Schema({
     image: String,
     description: String,
     location: String,
+    author: {
+        // reference to the type 'User' model 
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
     reviews: [
         {
             // the type here is of Object Id, something not native in js, so we have to explicitly define it
