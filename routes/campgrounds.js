@@ -7,28 +7,30 @@ const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
 
 // error handling : we are putting our entire function inside the catchAsync function
 
-// index/homepage
-// using the method "index" provided to us by the campgrounds controller
-router.get('/', catchAsync(campgrounds.index));
+router.route('/')
+    // index/homepage
+    // using the method "index" provided to us by the campgrounds controller
+    .get(catchAsync(campgrounds.index))
+    // posting data for new campground
+    .post(isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
 
 
-// adding new campground (2 step procedure)
-// Step 1 : Render the form
 // using isLoggedIn middleware to protect certain routes, like this one
+// render login form
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
-// Step 2 : Post data from the form
-router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground));
 
 
-// details of a particular camp
-router.get('/:id', catchAsync(campgrounds.showCampground));
+router.route('/:id')
+    // details of a particular camp
+    .get(catchAsync(campgrounds.showCampground))
+    // updating a campground
+    .put(isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground))
+    // deleting a campground
+    .delete(isAuthor, isLoggedIn, catchAsync(campgrounds.deleteCampground));
 
-// updating a campground (again a 2 step procedure)
+
+// render edit form for campground
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
-router.put('/:id', isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground));
-
-// deleting a campground
-router.delete('/:id', isAuthor, isLoggedIn, catchAsync(campgrounds.deleteCampground));
 
 // exporting router
 module.exports = router;
